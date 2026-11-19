@@ -20,6 +20,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background: radial-gradient(ellipse at 95% 0%, #eadcc7, var(--sand) 46rem);
+  overflow-wrap: anywhere;
 }
 
 a { color: inherit; }
@@ -60,6 +61,7 @@ button { cursor: pointer; font: inherit; }
   display: inline-flex;
   align-items: center;
   gap: .65rem;
+  max-width: 100%;
   min-height: 44px;
   color: var(--teal);
   font-size: 1.4rem;
@@ -73,14 +75,20 @@ button { cursor: pointer; font: inherit; }
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 clamp(.5rem, 2vw, 1.4rem);
+  width: 100%;
+  max-width: 100%;
+  gap: .35rem .5rem;
 }
 
 .site-nav a {
   display: inline-flex;
   align-items: center;
+  flex: 1 1 max(8rem, calc(50% - .25rem));
+  min-width: 0;
   min-height: 44px;
-  padding-inline: .25rem;
+  padding: .35rem .6rem;
+  border-radius: .5rem;
+  background: #124f500a;
   color: var(--teal);
   font-size: .9rem;
   font-weight: 650;
@@ -91,7 +99,7 @@ button { cursor: pointer; font: inherit; }
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: clamp(1.5rem, 5vw, 4.5rem);
   padding-block: clamp(1.25rem, 5vw, 4rem);
@@ -99,10 +107,10 @@ button { cursor: pointer; font: inherit; }
 
 h1 {
   margin: .5rem 0 1.15rem;
-  font-size: clamp(2.25rem, 6vw, 4.85rem);
+  font-size: clamp(1.4rem, calc(1rem + 4.3vw), 4.25rem);
   line-height: 1.02;
   letter-spacing: -.055em;
-  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 h1 em { display: block; color: var(--teal); font-style: normal; }
@@ -115,8 +123,11 @@ p { margin: .65rem 0; color: var(--muted); line-height: 1.6; }
   display: flex;
   flex-wrap: wrap;
   gap: .75rem;
+  max-width: 31rem;
   margin-block: 1.4rem .8rem;
 }
+
+.cta .btn { flex: 1 1 12.5rem; min-width: 0; }
 
 .btn {
   display: inline-flex;
@@ -177,21 +188,22 @@ p { margin: .65rem 0; color: var(--muted); line-height: 1.6; }
 }
 
 .actions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: .4rem;
 }
 
 .actions button {
+  flex: 1 1 4.65rem;
+  min-width: 0;
   min-height: 53px;
   padding: .45rem .25rem;
   border: 1px solid #6c8798;
   border-radius: .6rem;
   background: #163a50;
   color: var(--demo-text);
-  font-size: .78rem;
+  font-size: .8125rem;
   line-height: 1.25;
-  overflow-wrap: anywhere;
 }
 
 .actions button span { display: block; margin-bottom: .2rem; }
@@ -200,27 +212,31 @@ p { margin: .65rem 0; color: var(--muted); line-height: 1.6; }
 .activity { margin-top: 1rem; }
 
 .row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
-  gap: .55rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .55rem;
   padding-block: .75rem;
   border-bottom: 1px solid #355567;
   font-size: .84rem;
   line-height: 1.35;
 }
 
+.row > div { flex: 1 1 9rem; min-width: 0; }
+.row > strong { margin-inline-start: auto; }
 .row:last-child { border-bottom: 0; padding-bottom: 0; }
 .row small { display: block; margin-top: .2rem; }
 
 .features {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-block: 1.5rem 3rem;
 }
 
 .feature {
+  flex: 1 1 16rem;
+  min-width: 0;
   padding: clamp(1rem, 3vw, 1.5rem);
   border: 1px solid var(--line);
   border-radius: 1rem;
@@ -253,16 +269,16 @@ dialog h2 { margin-top: 0; }
 dialog .btn { margin-top: .5rem; }
 dialog::backdrop { background: #102c42a8; }
 
-@media (max-width: 48rem) {
-  .hero { grid-template-columns: minmax(0, 1fr); }
-  .features { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 36rem) {
+  .site-nav {
+    width: auto;
+    gap: 0 clamp(.5rem, 2vw, 1.4rem);
+  }
+
+  .site-nav a { flex: 0 1 auto; padding-inline: .25rem; background: transparent; }
 }
 
-@media (max-width: 33rem) {
-  .site-header { align-items: flex-start; }
-  .site-nav { flex-basis: 100%; }
-}
-
-@media (max-width: 26rem) {
-  .cta { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 52rem) {
+  .hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+  .cta .btn { flex: 0 1 auto; }
 }
